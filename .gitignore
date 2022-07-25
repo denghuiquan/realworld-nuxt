@@ -1,0 +1,4 @@
+node_modules
+.nuxt
+temp
+dist
