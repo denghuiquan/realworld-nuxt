@@ -33,7 +33,8 @@ Project Url: [https://api.github.com/repos/denghuiquan/realworld-nuxt](https://a
 - 文章发表/修改/列表/分页/标签/详情/点赞/取消点赞
 - 个人中心，个人信息更新
 ---
-- 另外：项目实现了实现自动化部署，部署成功的[服务器地址](http://nuxt-realworld.mydomain.com): http://nuxt-realworld.mydomain.com
+- 另外：项目实现了实现自动化部署，部署成功的[服务器地址](http://114.115.249.250:3000/)
+- [***部署成功的服务器地址***](http://114.115.249.250:3000/)
 
 ## 项目的打包与服务器启动及部署
 ### 本地开发项目启动
