@@ -1,11 +1,9 @@
 <template>
   <nav class="navbar navbar-light">
     <div class="container">
-      <!-- <a class="navbar-brand" href="/">conduit</a> -->
-      <nuxt-link class="navbar-brand" to="/">conduit</nuxt-link>
+      <nuxt-link class="navbar-brand" to="/">{{ brand }}</nuxt-link>
       <ul class="nav navbar-nav pull-xs-right">
         <li class="nav-item">
-          <!-- Add "active" class when you're on that page" -->
           <nuxt-link class="nav-link" to="/" exact>Home</nuxt-link>
         </li>
         <template v-if="user">

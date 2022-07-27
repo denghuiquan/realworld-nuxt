@@ -8,7 +8,7 @@ export default {
   },
   // SEO优化
   head: {
-    title: 'conduit Home Page - Realworld',
+    title: 'Knowledge Cradle Home Page - Realworld',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -16,6 +16,11 @@ export default {
         hid: 'description',
         name: 'description',
         content: 'A place to share your knowledge.'
+      },
+      {
+        hid: 'brand',
+        name: 'brand',
+        content: 'Knowledge Cradle'
       }
     ],
     link: [
