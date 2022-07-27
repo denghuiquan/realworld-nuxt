@@ -155,11 +155,13 @@ npm run start
             # 下载上传的release到服务器（使用我们自己的github仓库https://github.com/denghuiquan/realworld-nuxt/releases/latest/download/release.tgz） # 解压  # 安装依赖  # 运行pm2（启动了则重启）
             script: |                
               cd /root/www
-              cat ${{ steps.create_release.outputs.upload_url }}
-              wget ${{ steps.create_release.outputs.upload_url }} -O release.tgz
+              cat ${{ steps.upload-release-asset.outputs }}
+              wget ${{ steps.upload-release-asset.outputs.upload_url }} -O release.tgz
               tar zxvf release.tgz
               npm install --production
               pm2 reload pm2.config.json
     ```
     到此就可以把项目修改commit和push到远程仓库。
+
+    当我们的代码准备好以后并且成功推送到远端仓库了，就可以使用`git tag vx.xx.x`给我们的项目创建标签,创建完成之后再次推送刚创建的tag到远端即可出发GitHub actions进行自动构建
 ### 本项目采用MIT开源协议开发，放在 github 个人仓库, 并且实现自动化部署，希望对大家有用。
