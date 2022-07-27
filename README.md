@@ -161,4 +161,5 @@ npm run start
               npm install --production
               pm2 reload pm2.config.json
     ```
+    到此就可以把项目修改commit和push到远程仓库。
 ### 本项目采用MIT开源协议开发，放在 github 个人仓库, 并且实现自动化部署，希望对大家有用。
