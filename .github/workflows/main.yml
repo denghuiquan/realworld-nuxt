@@ -56,8 +56,7 @@ jobs:
         # 下载上传的release到服务器（使用我们自己的github仓库https://github.com/denghuiquan/realworld-nuxt/releases/latest/download/release.tgz） # 解压  # 安装依赖  # 运行pm2（启动了则重启）
         script: |                
           cd /root/www
-          cat ${{ steps.upload-release-asset.outputs }}
-          wget ${{ steps.upload-release-asset.outputs.upload_url }} -O release.tgz
+          wget https://github.com/denghuiquan/realworld-nuxt/releases/latest/download/release.tgz -O release.tgz
           tar zxvf release.tgz
           npm install --production
           pm2 reload pm2.config.json
