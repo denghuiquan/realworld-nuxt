@@ -1,0 +1,63 @@
+name: Publish And Deploy Demo
+on:
+  push: 
+    tags: # 这里表示的是针对提交标签版本，不是每次push，cicd都去自动部署
+      - 'v*' 
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest # 任务运行在 ubuntu系统上（虚拟操作系统）
+    steps:
+
+    # 下载源码
+    - name: Checkout
+      uses: actions/checkout@master
+
+    # 打包构建
+    - name: Build
+      uses: actions/setup-node@master
+    - run: npm install
+    - run: npm run build
+    - run: tar -zcvf release.tgz .nuxt static nuxt.config.js package.json package-lock.json pm2.config.json # 压缩，打包成 release.tgz
+
+    # 发布 Release
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }} # TOKEN
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false # 草稿
+        prerelease: false # 预发布
+
+    # 上传构建结果到 Release
+    - name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.TOKEN }}  # 用到我们设置的 TOKEN了
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./release.tgz
+        asset_name: release.tgz
+        asset_content_type: application/x-tgz
+
+    # 部署到服务器
+    - name: Deploy
+      uses: appleboy/ssh-action@master
+      with: # 登录远程服务器
+        host: ${{ secrets.HOST }}  
+        username: ${{ secrets.USERNAME }}
+        password: ${{ secrets.PASSWORD }}
+        port: ${{ secrets.PORT }}
+        # 运行在远程服务器的命令  
+        # 下载上传的release到服务器（使用我们自己的github仓库https://github.com/denghuiquan/realworld-nuxt/releases/latest/download/release.tgz） # 解压  # 安装依赖  # 运行pm2（启动了则重启）
+        script: |                
+          cd /root/www
+          cat ${{ steps.create_release.outputs.upload_url }}
+          wget ${{ steps.create_release.outputs.upload_url }} -O release.tgz
+          tar zxvf release.tgz
+          npm install --production
+          pm2 reload pm2.config.json

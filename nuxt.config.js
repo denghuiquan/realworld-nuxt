@@ -2,6 +2,10 @@
  * nuxt 项目配置文件
  */
 export default {
+  server: {
+    host: '0.0.0.0', // 想让服务对外可以访问的话需要这样配置host，说白了就是要监听所有的网卡地址
+    port: 3000
+  },
   // SEO优化
   head: {
     title: 'conduit Home Page - Realworld',
@@ -55,6 +59,5 @@ export default {
     }
   },
   // 注册插件
-  plugins: ['~/plugins/request.js', '~/plugins/filters.js'],
-  transition: 'fade'
+  plugins: ['~/plugins/request.js', '~/plugins/filters.js']
 }
