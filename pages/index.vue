@@ -190,6 +190,7 @@ export default {
   },
   data () {
     return {
+      brand: 'Knowledge Cradle',
       description: 'A place to share your knowledge.'
     }
   },

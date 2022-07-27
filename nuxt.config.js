@@ -16,11 +16,6 @@ export default {
         hid: 'description',
         name: 'description',
         content: 'A place to share your knowledge.'
-      },
-      {
-        hid: 'brand',
-        name: 'brand',
-        content: 'Knowledge Cradle'
       }
     ],
     link: [
